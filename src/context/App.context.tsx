@@ -19,8 +19,6 @@ export const AppContext = React.createContext<{
   dispatch: React.Dispatch<Action>;
 } | null>(null);
 
-// TODO: Populate initial state from localStorage
-// TODO: Save to localStorage (as side effect
 export function AppContextWrap(props: PropsWithChildren) {
   const initialState = {
     isLocalStorageReady: false,

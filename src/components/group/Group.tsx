@@ -12,11 +12,14 @@ export function Group(props: { group: Group }) {
   const isGroupCompleted =
     tasksOfGroup.map((t) => t.id).filter((id) => !state.completed.includes(id)).length === 0;
 
+  const groupBlockerIds = Array.from(new Set(tasksOfGroup.map((task) => task.blockers).flat()));
+  const isGroupBlocked = groupBlockerIds.filter((id) => !state.completed.includes(id)).length > 0;
+
   return (
     <section>
       <div className="flex items-center gap-2 mb-2">
         <h2 className="font-bold">{props.group.label}</h2>
-        {isGroupCompleted && <span className="text-xl">🎉</span>}
+        {isGroupCompleted && <span className="text-xl">{isGroupBlocked ? '⚠️' : '🎉'}</span>}
       </div>
       <ol>
         {tasksSorted.map((task) => (
